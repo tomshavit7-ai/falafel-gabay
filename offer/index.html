@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<meta property="og:title" content="הצעת מחיר: אתר חדש לפלאפל גבאי">
+<meta property="og:description" content="מה כלול, המחיר ומה צריך מכם. TOMI web studio">
+<meta property="og:image" content="https://tomshavit7-ai.github.io/falafel-gabay/img/salad-bar.jpg">
+<meta property="og:type" content="website">
+<title>הצעת מחיר, פלאפל גבאי</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Karantina:wght@700&family=IBM+Plex+Sans+Hebrew:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* one A4 page: a green name band on top, then what's included, two price blocks, terms, and what we need */
+:root{
+  --parsley:#0F6B3E; --parsley-d:#0A4F2D; --mint:#DFF0E5; --turnip:#C92A63; --turnip-l:#FBE1EA;
+  --ink:#14211A; --muted:#5B6B62; --wall:#F3F6F3; --grout:#DCE4DE; --line:#E3E9E4;
+  --display:"Karantina","IBM Plex Sans Hebrew",sans-serif; --body:"IBM Plex Sans Hebrew",Arial,sans-serif;
+}
+@page{size:A4;margin:0}
+*{box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+html,body{margin:0;background:#fff;color:var(--ink);font-family:var(--body);font-size:12.5pt;line-height:1.5}
+.page{width:210mm;min-height:297mm;display:flex;flex-direction:column}
+.top{background:var(--parsley);color:#fff;padding:9mm 16mm 7mm;position:relative}
+.top .brand{display:flex;justify-content:space-between;align-items:baseline;font-size:10.5pt;opacity:.9}
+.top .brand b{font-weight:700;letter-spacing:1.5px}
+.top h1{font-family:var(--display);font-weight:700;font-size:50pt;line-height:.85;margin:4mm 0 2mm;text-shadow:3px 3px 0 var(--turnip)}
+.top p{margin:0;font-size:13pt}
+.top a{color:#fff;font-weight:600}
+.body{padding:6mm 16mm 0;display:grid;gap:4.5mm;align-content:start}
+h2{font-family:var(--display);font-weight:700;font-size:26pt;line-height:.9;margin:0 0 2.5mm;color:var(--ink)}
+.inc{display:grid;grid-template-columns:1fr 1fr;gap:1.4mm 8mm;margin:0;padding:0;list-style:none}
+.inc li{display:flex;gap:2.5mm;align-items:flex-start;font-size:10.8pt;line-height:1.35}
+.inc li::before{content:"";flex:none;width:3.2mm;height:3.2mm;margin-top:1.4mm;border-radius:1mm;background:var(--parsley)}
+.inc li.hl::before{background:var(--turnip)}
+.prices{display:grid;grid-template-columns:1fr 1fr;gap:6mm}
+.price{border:2px solid var(--ink);border-radius:2mm;padding:3.5mm 5mm}
+.price.main{background:var(--wall)}
+.price small{display:block;font-weight:600;color:var(--muted);font-size:10.5pt}
+.price .n{font-family:var(--display);font-weight:700;font-size:44pt;line-height:.9;color:var(--parsley);margin:1mm 0 1.5mm}
+.price .n span{font-family:var(--body);font-size:15pt;font-weight:700;color:var(--ink)}
+.price ul{margin:0;padding:0 4.5mm 0 0;font-size:10.5pt;line-height:1.4}
+.terms{display:grid;grid-template-columns:repeat(2,1fr);gap:3mm}
+.terms div{background:var(--mint);border-radius:2mm;padding:2.5mm 4mm;font-size:10.5pt}
+.terms b{display:block;font-size:11.5pt}
+.note{background:var(--turnip-l);border-radius:2mm;padding:3mm 4.5mm;font-size:10.2pt;line-height:1.45}
+.note b{display:block;margin-bottom:.5mm}
+.need{margin:0;padding:0 5mm 0 0;font-size:10.8pt;line-height:1.45}
+.foot{margin-top:auto;padding:4mm 16mm 8mm;display:flex;justify-content:space-between;align-items:flex-end;border-top:2px solid var(--ink);margin-inline:16mm;padding-inline:0}
+.foot .sig{font-size:12pt}
+.foot .sig b{font-family:var(--display);font-size:26pt;line-height:.9;display:block;color:var(--parsley)}
+.foot .tomi{direction:ltr;font-size:10pt;color:var(--muted)}
+.foot .tomi b{color:var(--ink);letter-spacing:1.5px}
+
+/* on screen: centered sheet; on phones: one column */
+@media screen{
+  body{background:var(--wall)}
+  .page{width:auto;max-width:210mm;min-height:0;margin:0 auto;background:#fff}
+  .top a{word-break:break-all}
+}
+@media screen and (max-width:640px){
+  html,body{font-size:15px}
+  .top{padding:22px 18px 18px}
+  .top .brand{flex-wrap:wrap;gap:4px 12px;font-size:13px}
+  .top h1{font-size:46px;margin:14px 0 8px}
+  .top p{font-size:15px}
+  .body{padding:22px 18px 0;gap:20px}
+  h2{font-size:36px;margin-bottom:10px}
+  .inc,.prices,.terms{grid-template-columns:1fr}
+  .inc{gap:8px}
+  .inc li{font-size:15px}
+  .inc li::before{width:12px;height:12px;margin-top:6px}
+  .prices{gap:14px}
+  .price{padding:14px 16px}
+  .price small,.price ul,.terms div,.note,.need{font-size:15px}
+  .price .n{font-size:60px}
+  .price .n span{font-size:20px}
+  .terms{gap:10px} .terms div{padding:12px 14px}
+  .note{padding:14px 16px}
+  .need{padding-right:20px}
+  .need li{margin-bottom:6px}
+  .foot{margin:24px 18px 0;padding:14px 0 28px}
+}
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="top">
+    <div class="brand"><span>הצעת מחיר · 16 בנובמבר 2026</span><span dir="ltr"><b>TOMI</b> web studio</span></div>
+    <h1>אתר חדש לפלאפל גבאי</h1>
+    <p>לצפייה באתר: <a href="https://tomshavit7-ai.github.io/falafel-gabay/">tomshavit7-ai.github.io/falafel-gabay</a></p>
+  </header>
+
+  <main class="body">
+    <section>
+      <h2>מה כלול באתר</h2>
+      <ul class="inc">
+        <li class="hl">הזמנה לאיסוף עצמי ישר מהאתר, עם תשלום באשראי, בביט או במזומן בקופה</li>
+        <li class="hl">כפתור "משלוח בוולט" שמוביל ישר לעמוד שלכם בוולט</li>
+        <li>התפריט המלא: 56 מנות עם מחירים ותמונות</li>
+        <li>עיצוב חדש ומודרני, מותאם לטלפון ולמחשב</li>
+        <li>שעות פתיחה, והודעה בראש האתר אם אתם פתוחים עכשיו</li>
+        <li>ביקורות של לקוחות ודירוג גוגל</li>
+        <li>כפתור חיוג, ניווט בוויז ובגוגל מפות</li>
+        <li>הצהרת נגישות ומדיניות פרטיות, כמו שהחוק דורש</li>
+        <li>העלאת האתר לכתובת שלכם: falafelgabay.co.il</li>
+      </ul>
+    </section>
+
+    <section class="prices">
+      <div class="price main">
+        <small>בניית האתר, תשלום אחד</small>
+        <div class="n">1,000 <span>₪</span></div>
+        <ul><li>עיצוב, תפריט, הזמנות והעלאה לאוויר</li><li>תיקונים עד שהאתר בדיוק כמו שאתם רוצים</li></ul>
+      </div>
+      <div class="price">
+        <small>תפעול חודשי</small>
+        <div class="n">80 <span>₪ לחודש</span></div>
+        <ul><li>דומיין ואחסון, הכול עליי</li><li>עדכון מחירים, מנות ושעות כשתבקשו</li><li>טיפול בכל תקלה, וזמינות בוואטסאפ</li></ul>
+      </div>
+    </section>
+
+    <section class="terms">
+      <div><b>תשלום</b>500 ₪ כשמתחילים, ו־500 ₪ כשהאתר עולה לאוויר</div>
+      <div><b>זמן עבודה</b>עד שבוע מהאישור ומקבלת הפרטים</div>
+    </section>
+
+    <section class="note">
+      <b>תשלום באשראי ובביט באתר</b>
+      כדי שהכסף ייכנס ישר לחשבון שלכם, צריך חשבון סליקה על שם העסק, למשל Grow. את החשבון פותחים ישירות מול חברת הסליקה, והעלות שלו היא אצלם: בערך 59 ₪ לחודש ועוד כ־0.75% מכל עסקה. אני מחבר אותו לאתר. עד שהוא מחובר, אפשר להזמין לאיסוף ולשלם במזומן או באשראי בקופה.
+    </section>
+
+    <section>
+      <h2>מה צריך מכם</h2>
+      <ol class="need">
+        <li>אישור שהשעות נכונות: א׳–ה׳ <span dir="ltr">11:00–21:30</span>, ו׳ <span dir="ltr">11:00–17:00</span></li>
+        <li>מחירי האיסוף בדלפק, אם הם שונים ממחירי וולט</li>
+        <li>מספר וואטסאפ של העסק, שאליו יגיעו ההזמנות לאיסוף</li>
+        <li>תמונות של 4 מנות שאין להן תמונה בוולט: <b>סטייק פרגית בפיתה</b>, <b>מרק בצל</b>, <b>הסלט של בן (שניצל)</b> ו<b>4 קציצות תפוחי אדמה קריספי</b>. מספיק לצלם בטלפון, באור טוב ומלמעלה, ולשלוח לי בוואטסאפ</li>
+        <li>הלוגו, אם יש קובץ</li>
+        <li>חשבון סליקה, אם רוצים תשלום באשראי ובביט באתר</li>
+      </ol>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="sig">אשמח לשמוע מה אתם חושבים,<b>תום</b></div>
+    <div class="tomi">Website by <b>TOMI</b></div>
+  </footer>
+</div>
+</body>
+</html>
