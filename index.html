@@ -1,0 +1,1082 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>פלאפל גבאי, תל אביב</title>
+<meta name="description" content="פלאפל, חומוס ואוכל ביתי ישראלי בבוגרשוב 25, תל אביב. תפריט, משלוחים, איסוף ושעות פתיחה.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="he_IL">
+<meta property="og:title" content="פלאפל גבאי, תל אביב">
+<meta property="og:description" content="פלאפל, חומוס ואוכל ביתי בבוגרשוב 25. משלוחים בתל אביב.">
+<meta property="og:url" content="https://tomshavit7-ai.github.io/falafel-gabay/">
+<meta property="og:image" content="https://tomshavit7-ai.github.io/falafel-gabay/img/salad-bar.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0F6B3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Karantina:wght@400;700&family=IBM+Plex+Sans+Hebrew:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="restaurant.js"></script>
+<style>
+/* פלאפל גבאי: קיר אריחים של דוכן, ירוק פטרוזיליה, ורוד של לפת כבושה, שלט צר וגבוה */
+:root{
+  --parsley:#0F6B3E; --parsley-d:#0A4F2D; --mint:#DFF0E5; --turnip:#C92A63; --turnip-l:#FBE1EA;
+  --ink:#14211A; --muted:#5B6B62; --wall:#F3F6F3; --grout:#DCE4DE; --paper:#ffffff; --line:#E3E9E4;
+  --amba:var(--parsley); --tomato:var(--turnip); --zaatar:var(--parsley); --sea:var(--ink); --dough:var(--wall);
+  --display:"Karantina","IBM Plex Sans Hebrew",system-ui,sans-serif;
+  --body:"IBM Plex Sans Hebrew",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --r-lg:6px; --r-md:6px; --r-sm:4px;
+  --mbar:66px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+html.lock{overflow:hidden}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;
+  padding-bottom:calc(var(--mbar) + env(safe-area-inset-bottom))}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+button{font:inherit;color:inherit;cursor:pointer}
+[hidden]{display:none!important}
+:focus-visible{outline:3px solid var(--turnip);outline-offset:3px}
+.wrap{max-width:1160px;margin:0 auto;padding:0 16px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.ic{width:22px;height:22px;flex:none}
+.tiles-bg{background-color:var(--wall);
+  background-image:linear-gradient(var(--grout) 2px,transparent 2px),linear-gradient(90deg,var(--grout) 2px,transparent 2px);
+  background-size:52px 52px;background-position:-1px -1px}
+
+/* ---------- buttons: flat, ink outline, like a painted sign ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:52px;padding:0 22px;border-radius:var(--r-sm);
+  font-weight:700;font-size:17px;text-decoration:none;border:2px solid var(--ink);transition:background-color .15s ease,color .15s ease;white-space:nowrap}
+.btn--amba{background:var(--parsley);border-color:var(--parsley);color:#fff}
+.btn--amba:hover{background:var(--parsley-d);border-color:var(--parsley-d)}
+.btn--ink{background:var(--ink);color:#fff}
+.btn--ink:hover{background:#000}
+.btn--white{background:#fff;color:var(--ink)}
+.btn--white:hover{background:var(--mint)}
+.btn--ghost{background:transparent}
+.btn--block{width:100%}
+.btn:active{transform:translateY(1px)}
+
+/* ---------- top strip + header ---------- */
+.strip{background:var(--ink);color:#fff;font-weight:500;font-size:15px}
+.strip .wrap{display:flex;align-items:center;justify-content:center;gap:10px;min-height:38px;text-align:center}
+.dot{width:9px;height:9px;border-radius:50%;background:#8a958f;flex:none}
+.is-open .dot{background:#4ADE80;box-shadow:0 0 0 4px rgba(74,222,128,.22)}
+.strip a{text-decoration:none;display:none}
+header.nav{position:sticky;top:0;z-index:40;background:#fff;border-bottom:2px solid var(--ink)}
+.nav .wrap{display:flex;align-items:center;gap:16px;min-height:62px}
+.logo{font-family:var(--display);font-weight:700;font-size:40px;line-height:1;text-decoration:none;color:var(--parsley)}
+.links{display:none;gap:24px;font-weight:600}
+.links a{text-decoration:none}
+.links a:hover{color:var(--turnip)}
+.nav__end{margin-inline-start:auto;display:flex;align-items:center;gap:10px}
+.cartbtn{position:relative;width:48px;height:48px;border-radius:var(--r-sm);border:2px solid var(--ink);background:#fff;display:grid;place-items:center}
+.count{position:absolute;top:-8px;inset-inline-end:-8px;min-width:22px;height:22px;padding:0 6px;border-radius:11px;background:var(--turnip);
+  color:#fff;font-size:13px;font-weight:700;display:grid;place-items:center}
+.nav .btn{min-height:48px;padding:0 18px;font-size:16px}
+
+/* ---------- hero: the name, painted big on the tiled wall ---------- */
+.hero{position:relative;overflow:hidden;border-bottom:2px solid var(--ink)}
+.hero__in{position:relative;display:grid;gap:28px;align-items:end;padding-top:34px;padding-bottom:36px}
+.hero h1{font-family:var(--display);font-weight:700;color:var(--parsley);font-size:clamp(150px,44vw,330px);line-height:.72;margin:0;
+  white-space:pre-line;letter-spacing:-1px;text-shadow:6px 6px 0 var(--turnip)}
+.hero__plate{display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:#fff;font-weight:600;font-size:16px;
+  padding:6px 14px;border-radius:var(--r-sm);margin:0 0 18px}
+.hero__sub{font-size:clamp(18px,2.2vw,22px);max-width:30ch;margin:26px 0 22px;font-weight:500}
+.hero__ctas{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.hero__pic{margin:0;border:2px solid var(--ink);background:#fff;padding:10px;transform:rotate(-2deg);max-width:460px}
+.hero__img{width:100%;aspect-ratio:4/5;object-fit:cover}
+.sticker{position:absolute;z-index:3;top:26px;inset-inline-end:16px;width:112px;height:112px;transform:rotate(10deg)}
+.sticker svg{width:100%;height:100%;overflow:visible}
+.sticker span{position:absolute;inset:0;display:grid;place-items:center;text-align:center;font-family:var(--display);font-weight:700;
+  font-size:30px;line-height:.85;color:#fff;padding:18px}
+
+.gbadge{display:inline-flex;align-items:center;gap:10px;background:#fff;color:var(--ink);text-decoration:none;border-radius:var(--r-sm);
+  padding:6px 14px 6px 12px;min-height:52px;border:2px solid var(--ink)}
+.gbadge svg.g{width:24px;height:24px}
+.gbadge b{font-size:20px;line-height:1}
+.stars{display:inline-flex;gap:1px;direction:ltr}
+.stars svg{width:15px;height:15px}
+.gbadge small{display:block;font-size:13px;color:var(--muted);line-height:1.2}
+
+/* ---------- headings ---------- */
+.h2{font-family:var(--display);font-weight:700;font-size:clamp(64px,12vw,120px);line-height:.85;margin:0 0 22px;color:var(--ink)}
+.squig,.wave{display:none}
+.lead{color:var(--muted);margin:0 0 26px;max-width:46ch}
+.sec{padding:60px 0}
+
+/* category rows: a menu board with dotted leaders */
+.tiles{display:block;border-top:2px solid var(--ink)}
+.tile{width:100%;display:flex;align-items:center;gap:14px;border:0;border-bottom:2px solid var(--ink);background:transparent;padding:14px 4px;
+  text-align:start;color:var(--ink);transition:background-color .15s ease}
+.tile:hover{background:var(--mint)}
+.tile b{font-family:var(--display);font-weight:700;font-size:clamp(52px,9vw,84px);line-height:.9;color:var(--c,var(--parsley))}
+.tile i{flex:1;align-self:flex-end;margin-bottom:16px;border-bottom:4px dotted var(--grout);min-width:20px}
+.tile small{font-weight:600;font-size:16px;color:var(--muted);white-space:nowrap}
+.tile img,.tile .ph{width:64px;height:64px;flex:none;object-fit:cover;border-radius:var(--r-sm)}
+.tile .arrow{width:26px;height:26px;flex:none;color:var(--ink)}
+
+/* story band */
+.story{background:var(--parsley);color:#fff;padding:64px 0}
+.story .h2{color:#fff}
+.story__grid{display:grid;gap:32px;align-items:center}
+.story__txt{min-width:0}
+.story p{margin:0 0 14px;font-size:18px;max-width:52ch}
+.story__img{width:100%;aspect-ratio:4/3;object-fit:cover;border:2px solid #fff}
+.badges{list-style:none;margin:20px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:10px}
+.badges li{background:#fff;color:var(--ink);border-radius:var(--r-sm);padding:6px 14px;font-weight:600;font-size:15px}
+@media (min-width:760px){ .story{padding:96px 0} .story__grid{grid-template-columns:1.1fr 1fr;gap:56px} }
+
+/* review board: notes taped to the tiled wall */
+.board{border-top:2px solid var(--ink);border-bottom:2px solid var(--ink)}
+.cork{padding:10px 0 0}
+.pins{display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-start;gap:40px 26px}
+.pinned{position:relative;transform:rotate(var(--r,0deg));transition:transform .3s cubic-bezier(.34,1.4,.64,1);box-shadow:0 6px 14px rgba(20,33,26,.16)}
+.pinned::before{content:"";position:absolute;top:-14px;left:50%;width:96px;height:26px;margin-left:-48px;z-index:2;transform:rotate(calc(var(--r,0deg) * -1.6));
+  background:var(--tape,rgba(201,42,99,.55));
+  -webkit-mask:linear-gradient(90deg,transparent 0 3px,#000 3px calc(100% - 3px),transparent calc(100% - 3px));mask:linear-gradient(90deg,transparent 0 3px,#000 3px calc(100% - 3px),transparent calc(100% - 3px))}
+@media (hover:hover){ .pinned:hover{transform:rotate(0deg) translateY(-6px);z-index:3} }
+.note{width:min(100%,300px);background:#fff;padding:28px 20px 16px;color:var(--ink);
+  background-image:repeating-linear-gradient(#fff 0 27px,var(--line) 27px 28px);background-position:0 54px}
+.note.white{background-color:#fff} .note.pink{background-color:var(--turnip-l);background-image:none}
+.note .st{color:#E0A100;letter-spacing:2px;font-size:18px;line-height:1}
+.note p{margin:10px 0 12px;font-size:16.5px;line-height:1.7}
+.note b{font-weight:700;font-size:16px}
+.note small{display:block;color:var(--muted);font-size:13px}
+.polaroid{width:170px;background:#fff;padding:9px 9px 34px}
+.polaroid img{width:100%;aspect-ratio:1;object-fit:cover;display:block}
+.polaroid span{position:absolute;bottom:4px;inset-inline:0;text-align:center;font-family:var(--display);font-weight:700;font-size:26px;line-height:1}
+@media (max-width:420px){ .polaroid{width:146px} .pins{gap:36px 16px} }
+
+.gal{display:flex;gap:14px;overflow-x:auto;padding:18px 16px 26px;scroll-snap-type:x mandatory;scrollbar-width:none}
+.gal::-webkit-scrollbar{display:none}
+.gal img{flex:none;width:min(62vw,300px);aspect-ratio:4/5;object-fit:cover;scroll-snap-align:center;border:2px solid var(--ink)}
+
+/* delivery band */
+.band{background:var(--turnip);color:#fff}
+.band .h2{color:#fff}
+.facts{display:grid;gap:12px;margin:0 0 28px;padding:0;list-style:none}
+.facts li{display:flex;gap:14px;align-items:center;border:2px solid #fff;border-radius:var(--r-md);padding:14px 16px;font-size:17px}
+.facts .ic{width:30px;height:30px}
+.facts b{display:block;font-family:var(--display);font-size:36px;line-height:.9}
+
+/* hours + map */
+.info{display:grid;gap:48px}
+.hours{list-style:none;margin:0;padding:0;border-top:2px solid var(--ink)}
+.hours li{display:flex;justify-content:space-between;gap:12px;padding:13px 6px;border-bottom:1px solid var(--line)}
+.hours li.today{background:var(--parsley);color:#fff;font-weight:700;border-bottom-color:var(--parsley)}
+.hours .t{direction:ltr;font-variant-numeric:tabular-nums}
+.map{width:100%;aspect-ratio:4/3;border:2px solid var(--ink);background:var(--wall);display:block}
+.mapcard{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-decoration:none;text-align:center;padding:20px}
+.mapcard .ic{width:48px;height:48px;color:var(--turnip)}
+.mapcard b{font-size:20px}
+.mapcard span{background:var(--ink);color:#fff;border-radius:var(--r-sm);padding:10px 20px;font-weight:700}
+.addr{font-size:20px;font-weight:700;margin:16px 0 12px}
+.row{display:flex;flex-wrap:wrap;gap:10px}
+.row .btn{min-height:48px;font-size:16px}
+
+footer{background:var(--parsley);color:#fff;margin-top:0}
+footer .wrap{padding-top:40px;padding-bottom:40px}
+footer .logo{color:#fff;font-size:96px;line-height:.8;display:block;margin-bottom:12px;text-shadow:4px 4px 0 var(--turnip)}
+footer p{margin:6px 0;font-size:15px}
+
+.legal{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:14px;font-size:15px}
+.credit{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 18px;margin:22px 0 0;padding-top:14px;border-top:1px solid rgba(255,255,255,.3);font-size:14px;opacity:.9}
+.credit b{letter-spacing:1.5px}
+.legal a{text-decoration:underline;text-underline-offset:3px;min-height:32px;display:inline-flex;align-items:center}
+.doc{max-width:680px;margin:0 auto;padding:6px 2px 48px}
+.doc h3{font-size:20px;margin:26px 0 6px}
+.doc p,.doc li{font-size:16.5px;line-height:1.75;max-width:62ch}
+.doc ul{padding-inline-start:20px;margin:6px 0}
+.doc .upd{color:var(--muted);font-size:14px}
+.cookie{position:fixed;z-index:60;inset-inline:12px;bottom:calc(var(--mbar) + env(safe-area-inset-bottom) + 12px);
+  background:#fff;border:2px solid var(--ink);border-radius:var(--r-md);padding:12px 14px;display:flex;align-items:center;gap:14px}
+.cookie p{margin:0;font-size:15px;flex:1;min-width:0}
+.cookie .btn{min-height:44px;padding:0 18px;flex:none}
+@media (min-width:760px){ .cookie{inset-inline:auto 24px;bottom:24px;max-width:460px} }
+
+/* mobile action bar */
+.mbar{position:fixed;inset-inline:0;bottom:0;z-index:45;display:grid;grid-template-columns:repeat(4,1fr);padding-bottom:env(safe-area-inset-bottom);background:var(--ink);border-top:2px solid var(--ink)}
+.mbar a,.mbar button{position:relative;border:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;height:var(--mbar);
+  text-decoration:none;color:#fff;font-weight:600;font-size:14px}
+.mbar .m1{background:var(--parsley)} .mbar .m2{background:var(--turnip)} .mbar .m3{background:#1F8A4C} .mbar .m4{background:var(--ink)}
+.mbar .count{top:6px;inset-inline-end:auto;inset-inline-start:calc(50% + 6px);background:#fff;color:var(--ink)}
+
+/* ================= menu window ================= */
+.layer{position:fixed;inset:0;z-index:100;background:var(--paper);display:flex;flex-direction:column}
+.mw-head{display:flex;align-items:center;gap:10px;padding:calc(10px + env(safe-area-inset-top)) 14px 10px;background:#fff}
+.mw-head h2{font-family:var(--display);font-weight:700;font-size:48px;margin:0;line-height:.9}
+.iconbtn{width:46px;height:46px;border-radius:var(--r-sm);border:2px solid var(--ink);background:#fff;display:grid;place-items:center;flex:none}
+.search{flex:1;position:relative;max-width:420px;margin-inline-start:auto}
+.search input{width:100%;height:46px;border-radius:var(--r-sm);border:2px solid var(--line);background:#fff;padding:0 44px 0 16px;font:inherit;font-size:16px;color:var(--ink)}
+.search input:focus{border-color:var(--ink);outline:none}
+.search .ic{position:absolute;inset-inline-start:14px;top:12px;color:var(--muted)}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:4px 14px 12px;scrollbar-width:none;border-bottom:2px solid var(--ink);background:#fff}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;border:2px solid var(--ink);background:#fff;border-radius:var(--r-sm);padding:0 16px;min-height:42px;font-weight:600;font-size:15px}
+.chip.on{background:var(--parsley);border-color:var(--parsley);color:#fff}
+.mw-body{flex:1;overflow-y:auto;overscroll-behavior:contain;padding:8px 14px 120px;scroll-padding-top:10px}
+.mw-cat{padding-top:20px}
+.mw-cat h3{font-family:var(--display);font-weight:700;font-size:54px;line-height:.9;margin:0 0 12px;display:flex;align-items:center;gap:10px}
+.mw-cat h3 i{width:14px;height:14px;flex:none}
+.grid{display:grid;gap:0;border-top:2px solid var(--ink)}
+.card{position:relative;display:flex;gap:14px;align-items:stretch;background:#fff;padding:14px 2px;border-bottom:1px solid var(--line);transition:background-color .15s ease}
+.card:hover{background:var(--wall)}
+.card__hit{position:absolute;inset:0;border:0;background:transparent;z-index:1}
+.card__txt{flex:1;min-width:0;display:flex;flex-direction:column}
+.card__name{font-weight:700;font-size:18px;line-height:1.3}
+.card__desc{color:var(--muted);font-size:14px;line-height:1.45;margin-top:3px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.card__price{margin-top:auto;padding-top:8px;font-weight:700;font-size:17px}
+.card__pic{position:relative;flex:none;width:104px;height:104px}
+.card__pic img{width:100%;height:100%;object-fit:cover;border-radius:var(--r-sm);background:var(--line)}
+.ph{width:100%;height:100%;border-radius:var(--r-sm);display:grid;place-items:center;color:var(--c);
+  background:color-mix(in srgb, var(--c) 10%, #fff);
+  background-image:linear-gradient(color-mix(in srgb, var(--c) 16%, transparent) 1px,transparent 1px),linear-gradient(90deg,color-mix(in srgb, var(--c) 16%, transparent) 1px,transparent 1px);background-size:13px 13px}
+.ph svg{width:46%;height:46%}
+.ph--s{width:62px;height:62px;flex:none}
+.it-ph{width:100%;aspect-ratio:16/7;display:grid}
+.it-ph .ph{border-radius:0}
+.add{position:absolute;z-index:2;bottom:-6px;inset-inline-end:-6px;width:42px;height:42px;border-radius:var(--r-sm);border:2px solid #fff;
+  background:var(--turnip);color:#fff;font-size:26px;font-weight:700;line-height:1;display:grid;place-items:center}
+.add:active{transform:scale(.92)}
+.tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
+.tag{font-size:12px;font-weight:700;border-radius:var(--r-sm);padding:2px 8px;background:var(--wall)}
+.tag.t-חריף{background:#FDE2E2;color:#9B1C1C} .tag.t-טבעוני{background:var(--mint);color:var(--parsley-d)}
+.tag.t-מומלץ{background:var(--turnip-l);color:#8E1A45} .tag.t-חדש{background:#E6ECF5;color:#23406B}
+.empty{text-align:center;color:var(--muted);padding:60px 10px}
+.catnote{margin:-4px 0 12px;color:var(--muted);font-size:15px;max-width:60ch}
+/* ordering through an outside service (orderUrl): the menu is for browsing, the order buttons open that service */
+.ext .add,.ext .cartbtn,.ext #itemSheet .stepper,.ext #itemSheet #itAdd,.ext #itemSheet fieldset:last-child{display:none!important}
+.cartbar{position:absolute;inset-inline:14px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:5}
+.cartbar .btn{width:100%;justify-content:space-between;min-height:58px;font-size:17px}
+.cartbar .pill{background:rgba(255,255,255,.18);border-radius:var(--r-sm);padding:3px 10px;font-size:15px}
+
+/* ================= sheets ================= */
+.scrim{position:fixed;inset:0;z-index:200;background:rgba(20,33,26,.55);display:flex;align-items:flex-end;justify-content:center}
+.sheet{background:#fff;width:100%;max-width:560px;max-height:92svh;border-radius:10px 10px 0 0;display:flex;flex-direction:column;overflow:hidden;border:2px solid var(--ink);border-bottom:0}
+.sheet__scroll{overflow-y:auto;overscroll-behavior:contain;flex:1}
+.sheet__foot{padding:12px 16px calc(12px + env(safe-area-inset-bottom));border-top:2px solid var(--ink);background:#fff}
+.sheet__head{display:flex;align-items:center;justify-content:space-between;padding:14px 16px 8px}
+.sheet__head h2{font-family:var(--display);font-weight:700;font-size:46px;line-height:.9;margin:0}
+@media (prefers-reduced-motion:no-preference){
+  .scrim{animation:fade .2s ease} .sheet{animation:up .26s cubic-bezier(.2,.8,.2,1)}
+  .layer{animation:fade .18s ease}
+  @keyframes fade{from{opacity:0}} @keyframes up{from{transform:translateY(40px);opacity:.6}}
+}
+.it-img{width:100%;aspect-ratio:16/10;object-fit:cover}
+.it-close{position:absolute;top:12px;inset-inline-start:12px;z-index:2}
+.it-body{padding:16px}
+.it-body h2{font-family:var(--display);font-weight:700;font-size:52px;margin:0;line-height:.9}
+.it-body p{color:var(--muted);margin:6px 0 0}
+fieldset{border:0;margin:18px 0 0;padding:0}
+legend{font-weight:700;font-size:18px;padding:0;margin-bottom:6px;display:flex;gap:8px;align-items:baseline}
+legend small{font-weight:500;color:var(--muted);font-size:14px}
+.opt{display:flex;align-items:center;gap:12px;min-height:50px;padding:6px 4px;border-bottom:1px solid var(--line);cursor:pointer}
+.opt input{width:22px;height:22px;accent-color:var(--parsley);flex:none;margin:0}
+.opt span{flex:1}
+.opt em{font-style:normal;color:var(--muted);font-size:15px}
+textarea,.field input,.field select{width:100%;font:inherit;font-size:16px;color:var(--ink);border:2px solid var(--line);border-radius:var(--r-sm);padding:12px 14px;background:#fff}
+textarea{min-height:76px;resize:vertical}
+textarea:focus,.field input:focus,.field select:focus{border-color:var(--ink);outline:none}
+.qtyrow{display:flex;align-items:center;gap:12px}
+.stepper{display:flex;align-items:center;border:2px solid var(--ink);border-radius:var(--r-sm);height:52px;flex:none}
+.stepper button{width:46px;height:100%;border:0;background:none;font-size:24px;font-weight:700}
+.stepper output{min-width:26px;text-align:center;font-weight:700;font-size:18px}
+.qtyrow .btn{flex:1;justify-content:space-between}
+
+.lines{list-style:none;margin:0;padding:0 16px}
+.line{display:flex;gap:12px;padding:14px 0;border-bottom:1px solid var(--line);align-items:flex-start}
+.line img{width:62px;height:62px;border-radius:var(--r-sm);object-fit:cover;flex:none}
+.line__txt{flex:1;min-width:0}
+.line__name{font-weight:700}
+.line__opts{color:var(--muted);font-size:14px;line-height:1.35}
+.line__end{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.line .stepper{height:38px}
+.line .stepper button{width:36px;font-size:20px}
+.line .stepper output{min-width:20px;font-size:16px}
+.sum{padding:14px 16px;display:grid;gap:6px}
+.sum div{display:flex;justify-content:space-between}
+.sum .tot{font-weight:700;font-size:20px;border-top:2px dashed var(--line);padding-top:8px;margin-top:4px}
+.hint{background:var(--turnip-l);border-radius:var(--r-sm);padding:10px 12px;font-size:15px;margin:0 16px 4px}
+.hint.ok{background:var(--mint)}
+
+.co{max-width:640px;margin:0 auto;padding:0 16px 30px}
+.co h3{font-family:var(--display);font-weight:700;font-size:40px;line-height:.9;margin:28px 0 12px}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.seg label{position:relative;display:flex;flex-direction:column;gap:2px;border:2px solid var(--line);border-radius:var(--r-md);padding:14px;background:#fff;cursor:pointer;min-height:64px}
+.seg label b{font-size:17px}
+.seg label small{color:var(--muted);font-size:14px}
+.seg input{position:absolute;opacity:0;pointer-events:none}
+.seg label:has(input:checked){border-color:var(--parsley);box-shadow:inset 0 0 0 1px var(--parsley);background:var(--mint)}
+.seg label:has(input:focus-visible){outline:3px solid var(--turnip);outline-offset:2px}
+.seg.three{grid-template-columns:repeat(3,1fr)}
+.seg .pm{display:block;height:28px;margin-bottom:6px}
+.seg .pm svg{height:28px;width:40px;display:block}
+.demo-pay{background:var(--turnip-l);border-radius:var(--r-sm);padding:10px 12px;font-size:15px;margin:14px 0 0}
+.field{margin-bottom:12px}
+.field label{display:block;font-weight:700;margin-bottom:5px;font-size:15px}
+.field .err{color:#B3200B;font-size:14px;margin-top:4px;display:none}
+.field.bad input{border-color:#B3200B}
+.field.bad .err{display:block}
+.two{display:grid;grid-template-columns:2fr 1fr;gap:10px}
+.paynote{font-size:14px;color:var(--muted);margin:8px 0 0}
+
+.done{max-width:520px;margin:0 auto;text-align:center;padding:40px 18px}
+.done .big{width:96px;height:96px;border-radius:50%;background:var(--parsley);color:#fff;display:grid;place-items:center;margin:0 auto 16px}
+.done h2{font-family:var(--display);font-weight:700;font-size:64px;line-height:.9;margin:0 0 10px}
+.done .box{background:var(--wall);border-radius:var(--r-md);padding:16px;text-align:start;margin:20px 0}
+
+.toast{position:fixed;z-index:300;left:50%;bottom:calc(96px + env(safe-area-inset-bottom));transform:translate(-50%,20px);opacity:0;
+  background:var(--ink);color:#fff;border-radius:var(--r-sm);padding:10px 18px;font-weight:600;transition:.25s ease;pointer-events:none;white-space:nowrap}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+/* ================= larger screens ================= */
+@media (min-width:760px){
+  body{padding-bottom:0}
+  .mbar{display:none}
+  .strip a{display:inline}
+  .links{display:flex}
+  .wrap{padding:0 32px}
+  .hero__in{padding-top:56px;padding-bottom:64px}
+  .hero__in.has-pic{grid-template-columns:1.25fr 1fr;align-items:center}
+  .has-pic h1{font-size:clamp(150px,20vw,290px)}
+  .sticker{width:150px;height:150px;top:44px;inset-inline-end:40px} .sticker span{font-size:40px}
+  .sec{padding:96px 0}
+  .facts{grid-template-columns:repeat(3,1fr)}
+  .info{grid-template-columns:1fr 1.3fr;gap:64px}
+  .grid{grid-template-columns:repeat(2,1fr);column-gap:28px}
+  .mw-head,.chips{padding-inline:28px}
+  .mw-body{padding-inline:28px}
+  .cartbar{inset-inline:auto 28px;width:380px}
+  .scrim{align-items:center}
+  .sheet{border-radius:10px;max-height:88vh;border-bottom:2px solid var(--ink)}
+  .gal{padding-inline:32px}
+}
+@media (min-width:1100px){
+  .grid{grid-template-columns:repeat(3,1fr)}
+  .mw-body,.chips,.mw-head{padding-inline:max(28px,calc((100vw - 1160px)/2))}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<div class="strip" id="strip"><div class="wrap"><span class="dot"></span><span id="statusTxt"></span><a id="stripPhone"></a></div></div>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" id="logo" href="#top"></a>
+    <nav class="links" aria-label="ניווט">
+      <a href="#" data-open-menu>תפריט</a><a href="#story" id="navStory" hidden>הסיפור</a><a href="#reviews" id="navRev" hidden>ביקורות</a><a href="#delivery" id="navDel">משלוחים</a><a href="#info">שעות</a><a href="#where">איך מגיעים</a>
+    </nav>
+    <div class="nav__end">
+      <button class="cartbtn" type="button" data-open-cart aria-label="העגלה">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>
+        <span class="count" data-count hidden></span>
+      </button>
+      <button class="btn btn--amba" type="button" data-open-menu>להזמנה</button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero tiles-bg" aria-labelledby="heroH">
+    <div class="sticker" aria-hidden="true"><svg viewBox="-60 -60 120 120"><polygon id="burst" fill="#C92A63" stroke="#fff" stroke-width="3" stroke-linejoin="round"/></svg><span id="stickerTxt"></span></div>
+    <div class="wrap hero__in" id="heroIn">
+      <div class="hero__body">
+        <p class="hero__plate" id="heroPlate"></p>
+        <h1 id="heroH"></h1>
+        <p class="hero__sub" id="heroSub"></p>
+        <div class="hero__ctas">
+          <button class="btn btn--amba" type="button" data-open-menu>משלוח או איסוף</button>
+          <a class="btn btn--white" id="heroCall"></a>
+          <a class="gbadge" id="gbadge" target="_blank" rel="noopener"></a>
+        </div>
+      </div>
+      <figure class="hero__pic" id="heroPic" hidden><img class="hero__img" id="heroImg" alt="" fetchpriority="high"></figure>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="catsH">
+    <div class="wrap">
+      <h2 class="h2" id="catsH">מה בפיתה היום?</h2>
+      <svg class="squig" viewBox="0 0 220 14" aria-hidden="true"><path d="M2 8 Q 16 1 30 8 T 58 8 T 86 8 T 114 8 T 142 8 T 170 8 T 198 8 T 218 6" fill="none" stroke="#E03A1E" stroke-width="4" stroke-linecap="round"/></svg>
+      <div class="tiles" id="tiles"></div>
+    </div>
+  </section>
+
+  <section class="story" id="story" aria-labelledby="storyH" hidden>
+    <div class="wrap story__grid">
+      <div class="story__txt">
+        <h2 class="h2" id="storyH"></h2>
+        <svg class="squig" viewBox="0 0 220 14" aria-hidden="true"><path d="M2 8 Q 16 1 30 8 T 58 8 T 86 8 T 114 8 T 142 8 T 170 8 T 198 8 T 218 6" fill="none" stroke="#FFB81C" stroke-width="4" stroke-linecap="round"/></svg>
+        <div id="storyBody"></div>
+        <ul class="badges" id="storyFacts"></ul>
+      </div>
+      <img class="story__img" id="storyImg" alt="" loading="lazy">
+    </div>
+  </section>
+
+  <section class="sec board tiles-bg" id="reviews" aria-labelledby="boardH" hidden>
+    <div class="wrap">
+      <h2 class="h2" id="boardH">מה כותבים עלינו</h2>
+      <svg class="squig" viewBox="0 0 220 14" aria-hidden="true"><path d="M2 8 Q 16 1 30 8 T 58 8 T 86 8 T 114 8 T 142 8 T 170 8 T 198 8 T 218 6" fill="none" stroke="#E03A1E" stroke-width="4" stroke-linecap="round"/></svg>
+      <div class="cork"><div class="pins" id="pins"></div></div>
+    </div>
+  </section>
+
+  <div class="gal" id="gal" aria-label="תמונות מהמקום"></div>
+
+  <section class="band" id="delivery" aria-labelledby="delH">
+    <svg class="wave" viewBox="0 0 1200 36" preserveAspectRatio="none" aria-hidden="true"><path d="M0 36 V18 C150 0 300 36 450 18 S750 0 900 18 S1100 36 1200 14 V36Z" fill="#1E63B5"/><path d="M0 0 H1200 V14 C1100 36 1050 0 900 18 S600 36 450 18 S150 0 0 18Z" fill="#FFF4E0"/></svg>
+    <div class="wrap sec" style="padding-top:40px">
+      <h2 class="h2" id="delH">משלוח עד הבית</h2>
+      <svg class="squig" viewBox="0 0 220 14" aria-hidden="true"><path d="M2 8 Q 16 1 30 8 T 58 8 T 86 8 T 114 8 T 142 8 T 170 8 T 198 8 T 218 6" fill="none" stroke="#FFB81C" stroke-width="4" stroke-linecap="round"/></svg>
+      <ul class="facts" id="facts"></ul>
+      <button class="btn btn--amba" type="button" data-open-menu>להזמנת משלוח</button>
+    </div>
+    <svg class="wave" viewBox="0 0 1200 36" preserveAspectRatio="none" aria-hidden="true" style="background:#FFF4E0"><path d="M0 0 H1200 V18 C1050 36 900 0 750 18 S450 36 300 18 S100 0 0 22Z" fill="#1E63B5"/></svg>
+  </section>
+
+  <section class="sec" id="info" aria-labelledby="infoH">
+    <div class="wrap info">
+      <div>
+        <h2 class="h2" id="infoH">שעות פתיחה</h2>
+        <svg class="squig" viewBox="0 0 220 14" aria-hidden="true"><path d="M2 8 Q 16 1 30 8 T 58 8 T 86 8 T 114 8 T 142 8 T 170 8 T 198 8 T 218 6" fill="none" stroke="#2F7D3A" stroke-width="4" stroke-linecap="round"/></svg>
+        <ul class="hours" id="hours"></ul>
+      </div>
+      <div id="where">
+        <h2 class="h2">איך מגיעים</h2>
+        <svg class="squig" viewBox="0 0 220 14" aria-hidden="true"><path d="M2 8 Q 16 1 30 8 T 58 8 T 86 8 T 114 8 T 142 8 T 170 8 T 198 8 T 218 6" fill="none" stroke="#1E63B5" stroke-width="4" stroke-linecap="round"/></svg>
+        <iframe class="map" id="map" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="מפה"></iframe>
+        <p class="addr" id="addr"></p>
+        <div class="row" id="navBtns"></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <svg class="wave" viewBox="0 0 1200 36" preserveAspectRatio="none" aria-hidden="true" style="background:#FFF4E0"><path d="M0 36 V18 C150 0 300 36 450 18 S750 0 900 18 S1100 36 1200 14 V36Z" fill="#FFB81C"/></svg>
+  <div class="wrap">
+    <span class="logo" id="fLogo"></span>
+    <p id="fLine"></p>
+    <p id="fNote"></p>
+    <nav class="legal" aria-label="מידע משפטי">
+      <a href="#" data-doc="privacy">מדיניות פרטיות</a>
+      <a href="#" data-doc="access">הצהרת נגישות</a>
+      <a href="#" data-doc="terms">תקנון הזמנות</a>
+      <a href="#" data-doc="cookies">עוגיות</a>
+    </nav>
+    <p class="credit"><span>© 2026 כל הזכויות שמורות</span><span dir="ltr">Website by <b>TOMI</b></span></p>
+  </div>
+</footer>
+
+<div class="cookie" id="cookie" role="region" aria-label="הודעת עוגיות" hidden>
+  <p>האתר משתמש בעוגיות ובאחסון בדפדפן כדי להציג את המפה ולשמור את העגלה. <a href="#" data-doc="cookies">פרטים</a></p>
+  <button class="btn btn--ink" type="button" id="cookieOk">הבנתי</button>
+</div>
+
+<div class="layer" id="docWin" role="dialog" aria-modal="true" aria-labelledby="docH" hidden>
+  <div class="mw-head">
+    <button class="iconbtn" type="button" data-close aria-label="סגירה"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    <h2 id="docH"></h2>
+  </div>
+  <div class="mw-body"><article class="doc" id="docBody"></article></div>
+</div>
+
+<nav class="mbar" aria-label="פעולות מהירות">
+  <button class="m1" type="button" data-open-menu><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>תפריט</button>
+  <a class="m2" id="callBtn"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>התקשרו</a>
+  <a class="m3" id="waBtn" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.47-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.91-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.7.63.71.22 1.36.2 1.87.12.57-.09 1.76-.72 2-1.42.25-.69.25-1.290.18-1.41-.08-.13-.28-.2-.57-.35m-5.42 7.4h-.01a9.870 9.870 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.510-5.26c0-5.45 4.44-9.88 9.890-9.88 2.64 0 5.12 1.03 6.99 2.9a9.82 9.82 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.88 9.88m8.41-18.3A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45h.01c6.55 0 11.89-5.34 11.890-11.89a11.82 11.82 0 0 0-3.48-8.41z"/></svg>וואטסאפ</a>
+  <button class="m4" type="button" data-open-cart><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>עגלה<span class="count" data-count hidden></span></button>
+</nav>
+
+<!-- ============ menu window ============ -->
+<div class="layer" id="menuWin" role="dialog" aria-modal="true" aria-labelledby="mwTitle" hidden>
+  <div class="mw-head">
+    <button class="iconbtn" type="button" data-close aria-label="סגירת התפריט"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    <h2 id="mwTitle">התפריט</h2>
+    <div class="search">
+      <label class="sr" for="q">חיפוש בתפריט</label>
+      <input id="q" type="search" placeholder="חיפוש מנה" autocomplete="off">
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+    </div>
+  </div>
+  <nav class="chips" id="chips" aria-label="קטגוריות"></nav>
+  <div class="mw-body" id="mwBody"></div>
+  <div class="cartbar" id="cartbar" hidden>
+    <button class="btn btn--ink" type="button" data-open-cart><span class="pill" id="cbCount"></span><span>לעגלה</span><span id="cbSum"></span></button>
+  </div>
+</div>
+
+<!-- item sheet -->
+<div class="scrim" id="itemSheet" role="dialog" aria-modal="true" aria-labelledby="itName" hidden>
+  <form class="sheet" id="itemForm">
+    <div class="sheet__scroll" style="position:relative">
+      <button class="iconbtn it-close" type="button" data-close aria-label="סגירה"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+      <img class="it-img" id="itImg" alt="">
+      <div class="it-body">
+        <h2 id="itName"></h2>
+        <p id="itDesc"></p>
+        <div id="itOpts"></div>
+        <fieldset><legend><label for="itNote">הערות למטבח</label> <small>לא חובה</small></legend>
+          <textarea id="itNote" placeholder="למשל: בלי בצל, חתוך לחצאים"></textarea></fieldset>
+      </div>
+    </div>
+    <div class="sheet__foot qtyrow">
+      <div class="stepper"><button type="button" id="itMinus" aria-label="פחות">−</button><output id="itQty" aria-live="polite">1</output><button type="button" id="itPlus" aria-label="עוד">+</button></div>
+      <button class="btn btn--amba" type="submit" id="itAdd"><span>הוספה לעגלה</span><span id="itTotal"></span></button>
+      <a class="btn btn--amba btn--block" id="itOrder" target="_blank" rel="noopener" hidden></a>
+    </div>
+  </form>
+</div>
+
+<!-- cart sheet -->
+<div class="scrim" id="cartSheet" role="dialog" aria-modal="true" aria-labelledby="cartH" hidden>
+  <div class="sheet">
+    <div class="sheet__head"><h2 id="cartH">העגלה שלך</h2>
+      <button class="iconbtn" type="button" data-close aria-label="סגירת העגלה"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+    <div class="sheet__scroll" id="cartBody"></div>
+    <div class="sheet__foot" id="cartFoot"></div>
+  </div>
+</div>
+
+<!-- checkout -->
+<div class="layer" id="checkout" role="dialog" aria-modal="true" aria-labelledby="coH" hidden>
+  <div class="mw-head">
+    <button class="iconbtn" type="button" data-close aria-label="חזרה לעגלה"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button>
+    <h2 id="coH">סיום הזמנה</h2>
+  </div>
+  <div class="mw-body" style="padding-bottom:40px">
+    <form class="co" id="coForm" novalidate>
+      <h3>איך לקבל את ההזמנה?</h3>
+      <div class="seg" role="radiogroup" aria-label="סוג הזמנה">
+        <label><input type="radio" name="mode" value="delivery" checked><b>משלוח</b><small id="segDel"></small></label>
+        <label><input type="radio" name="mode" value="pickup"><b>איסוף עצמי</b><small>מהדלפק</small></label>
+      </div>
+
+      <h3>פרטים</h3>
+      <div class="field" data-f="name"><label for="fName">שם מלא</label><input id="fName" autocomplete="name"><div class="err">צריך שם כדי שנדע למי ההזמנה.</div></div>
+      <div class="field" data-f="phone"><label for="fPhone">טלפון</label><input id="fPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="050-0000000" dir="ltr" style="text-align:right"><div class="err">מספר טלפון ישראלי, 9–10 ספרות.</div></div>
+      <div id="addrBox">
+        <div class="two">
+          <div class="field" data-f="street"><label for="fStreet">רחוב ומספר בית</label><input id="fStreet" autocomplete="street-address"><div class="err">צריך כתובת למשלוח.</div></div>
+          <div class="field"><label for="fApt">קומה ודירה</label><input id="fApt"></div>
+        </div>
+        <div class="field"><label for="fNote">הערות לשליח</label><input id="fNote" placeholder="קוד לבניין, איפה לחנות"></div>
+      </div>
+
+      <h3>מתי?</h3>
+      <div class="seg">
+        <label><input type="radio" name="when" value="now" checked><b>כמה שיותר מהר</b><small id="segNow"></small></label>
+        <label><input type="radio" name="when" value="later"><b>לשעה מסוימת</b><small>היום</small></label>
+      </div>
+      <div class="field" id="timeBox" hidden style="margin-top:10px"><label for="fTime">שעה</label><select id="fTime"></select></div>
+
+      <h3>תשלום</h3>
+      <div class="seg three">
+        <label><input type="radio" name="pay" value="card" checked><span class="pm" aria-hidden="true"><svg viewBox="0 0 40 28"><rect x="1" y="1" width="38" height="26" rx="4" fill="#1E63B5"/><rect x="1" y="7" width="38" height="5" fill="#2B1B12"/><rect x="5" y="17" width="12" height="3" rx="1.5" fill="#fff"/><circle cx="28" cy="20" r="4" fill="#E03A1E"/><circle cx="32" cy="20" r="4" fill="#FFB81C" fill-opacity=".9"/></svg></span><b>אשראי</b><small>באתר</small></label>
+        <label><input type="radio" name="pay" value="bit"><span class="pm" aria-hidden="true"><svg viewBox="0 0 40 28"><rect x="1" y="1" width="38" height="26" rx="8" fill="#00B2A9"/><text x="20" y="19.5" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="14" fill="#fff">bit</text></svg></span><b>ביט</b><small>מהטלפון</small></label>
+        <label><input type="radio" name="pay" value="cash"><span class="pm" aria-hidden="true"><svg viewBox="0 0 40 28"><rect x="1" y="4" width="38" height="20" rx="3" fill="#2F7D3A"/><circle cx="20" cy="14" r="5" fill="none" stroke="#fff" stroke-width="2"/><circle cx="7" cy="14" r="1.6" fill="#fff"/><circle cx="33" cy="14" r="1.6" fill="#fff"/></svg></span><b>מזומן</b><small id="cashSub">לשליח</small></label>
+      </div>
+      <p class="paynote" id="payNote"></p>
+
+      <h3>סיכום</h3>
+      <div class="sum" id="coSum" style="background:#fff;border-radius:18px"></div>
+      <p class="hint" id="coMin" hidden style="margin:10px 0 0"></p>
+      <div style="margin-top:20px"><button class="btn btn--amba btn--block" type="submit" id="coSubmit"></button></div>
+    </form>
+  </div>
+</div>
+
+<!-- done -->
+<div class="layer" id="doneWin" role="dialog" aria-modal="true" aria-labelledby="doneH" hidden>
+  <div class="mw-body"><div class="done">
+    <div class="big"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></div>
+    <h2 id="doneH">ההזמנה התקבלה</h2>
+    <p id="doneTxt"></p>
+    <div class="box" id="doneBox"></div>
+    <div style="display:grid;gap:12px">
+      <a class="btn btn--ink" id="doneWa" target="_blank" rel="noopener">שליחת ההזמנה גם בוואטסאפ</a>
+      <button class="btn btn--ghost" type="button" id="doneBack">חזרה לאתר</button>
+    </div>
+  </div></div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+"use strict";
+const R = window.RESTAURANT, D = R.delivery;
+const $ = id => document.getElementById(id);
+const DAYS = ["ראשון","שני","שלישי","רביעי","חמישי","שישי","שבת"];
+const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const img = (u,w,h) => u.includes("unsplash.com") ? `${u}?auto=format&fit=crop&w=${w}${h?`&h=${h}`:""}&q=70` : u;
+const ils = n => `${n} ₪`;
+const tel = R.phone.replace(/[^0-9+]/g,"");
+
+/* ---------- page content ---------- */
+document.title = R.name ? `${R.name}, ${R.city}` : `${R.fullName}, ${R.city}`;
+if (R.name){ $("logo").textContent = R.name; $("fLogo").textContent = R.name; } else { $("logo").style.visibility="hidden"; $("fLogo").remove(); }
+if (R.hero.image){ $("heroImg").src = img(R.hero.image,1000); $("heroPic").hidden = false; $("heroIn").classList.add("has-pic"); }
+$("heroPlate").textContent = R.city;
+$("heroH").textContent = R.hero.title; $("heroSub").textContent = R.hero.sub;
+$("heroCall").href = `tel:${R.phone.replace(/[^0-9+]/g,"")}`; $("heroCall").textContent = `להתקשר: ${R.phone}`;
+$("stickerTxt").textContent = R.hero.stickerText || (D ? `משלוחים ל${D.area}` : "");
+if (!$("stickerTxt").textContent) document.querySelector(".sticker").hidden = true;
+$("burst").setAttribute("points", Array.from({length:36},(_,i)=>{const a=i*Math.PI/18, r=i%2?50:57; return `${(r*Math.cos(a)).toFixed(1)},${(r*Math.sin(a)).toFixed(1)}`}).join(" "));
+$("stripPhone").href = `tel:${tel}`; $("stripPhone").textContent = `| ${R.phone}`;
+$("callBtn").href = `tel:${tel}`;
+if (R.whatsapp) $("waBtn").href = `https://wa.me/${R.whatsapp}?text=${encodeURIComponent("שלום, אני רוצה להזמין")}`;
+
+// google badge
+const star = f => `<svg viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="s${Math.round(f*100)}"><stop offset="${f*100}%" stop-color="#FBBC05"/><stop offset="${f*100}%" stop-color="#dadce0"/></linearGradient></defs><path fill="url(#s${Math.round(f*100)})" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>`;
+if (!R.google) $("gbadge").remove(); else {
+const rt = R.google.rating, gb = $("gbadge");
+gb.href = R.mapsLink; gb.setAttribute("aria-label",`דירוג ${rt} מתוך 5 בגוגל, ${R.google.reviews} ביקורות`);
+gb.innerHTML = `<svg class="g" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.49 12.27c0-.79-.07-1.54-.19-2.27H12v4.51h6.47c-.29 1.48-1.14 2.73-2.4 3.58v3h3.86c2.26-2.09 3.56-5.17 3.56-8.82z"/><path fill="#34A853" d="M12 24c3.24 0 5.950-1.08 7.93-2.91l-3.86-3c-1.08.72-2.45 1.16-4.07 1.16-3.13 0-5.78-2.11-6.73-4.96H1.29v3.09C3.26 21.3 7.31 24 12 24z"/><path fill="#FBBC05" d="M5.27 14.29c-.25-.72-.38-1.49-.38-2.29s.14-1.57.38-2.29V6.62H1.29C.47 8.24 0 10.06 0 12s.47 3.76 1.29 5.38l3.98-3.09z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.420C17.95 1.19 15.24 0 12 0 7.31 0 3.26 2.7 1.29 6.62l3.98 3.09c.95-2.85 3.6-4.96 6.73-4.96z"/></svg>
+  <b>${rt.toFixed(1)}</b><span><span class="stars">${[0,1,2,3,4].map(i=>star(Math.max(0,Math.min(1,rt-i)))).join("")}</span><small>${R.google.reviews} ביקורות בגוגל</small></span>`;
+}
+if (!R.whatsapp){ $("waBtn").remove(); document.querySelector(".mbar").style.gridTemplateColumns = "repeat(3,1fr)"; }
+
+// tiles
+const tileCats = R.menu.slice(0,4);
+$("tiles").innerHTML = R.menu.map(c => {
+  const pic = c.items.find(i => i.img);
+  return `<button class="tile" type="button" style="--c:${c.color}" data-open-menu="${c.id}">
+    ${pic?`<img src="${img(pic.img,160,160)}" alt="" loading="lazy" width="64" height="64">`:""}
+    <b>${esc(c.title)}</b><i aria-hidden="true"></i><small>${c.items.length===1?"פריט אחד":c.items.length+" פריטים"}</small>
+    <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg></button>`;
+}).join("");
+$("gal").innerHTML = (R.gallery||[]).map(u => `<img src="${img(u,600,750)}" alt="" loading="lazy" width="600" height="750">`).join("");
+if (!(R.gallery||[]).length) $("gal").hidden = true;
+
+// review board
+if (R.board && R.board.length){
+  $("reviews").hidden = false; $("navRev").hidden = false;
+  const rot = [-3, 2.5, -1.5, 3, -2.5, 1.5, -1, 2];
+  const tapes = ["rgba(201,42,99,.55)","rgba(15,107,62,.45)","rgba(224,161,0,.5)"];
+  const tints = ["", "pink"];
+  let n = 0;
+  $("pins").innerHTML = R.board.map((b,i) => {
+    const st = `--r:${rot[i%rot.length]}deg;--tape:${tapes[i%3]}`;
+    if (b.photo) return `<figure class="pinned polaroid" style="${st};margin:0"><img src="${img(b.photo,400,400)}" alt="${esc(b.caption||"")}" loading="lazy" width="300" height="300"><span>${esc(b.caption||"")}</span></figure>`;
+    const t = tints[(n++)%tints.length];
+    return `<blockquote class="pinned note ${t}" style="${st};margin:0"><div class="st" aria-label="${b.stars||5} כוכבים">${"★".repeat(b.stars||5)}</div><p>${esc(b.text)}</p><b>${esc(b.name)}</b><small>ביקורת בגוגל</small></blockquote>`;
+  }).join("");
+}
+
+// story
+if (R.story){
+  $("story").hidden = false; $("navStory").hidden = false;
+  $("storyH").textContent = R.story.title;
+  $("storyBody").innerHTML = R.story.paragraphs.map(p => `<p>${esc(p)}</p>`).join("");
+  $("storyFacts").innerHTML = (R.story.facts||[]).map(f => `<li>${esc(f)}</li>`).join("");
+  if (R.story.image) $("storyImg").src = img(R.story.image,900,675); else $("storyImg").remove();
+}
+
+// delivery facts
+const ico = {
+  pin:'<path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/>',
+  clock:'<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>',
+  bag:'<path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18M16 10a4 4 0 0 1-8 0"/>'
+};
+const svg = k => `<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ico[k]}</svg>`;
+if (!D){ $("delivery").hidden = true; $("navDel").hidden = true; }
+else $("facts").innerHTML = `
+  <li>${svg("pin")}<span><b>${esc(D.area)}</b>עד הדלת</span></li>
+  ${D.time?`<li>${svg("clock")}<span><b>${esc(D.time)}</b>מההזמנה ועד אליך</span></li>`:`<li>${svg("clock")}<span><b>חם ומהיר</b>יוצא מהמטבח ישר אליך</span></li>`}
+  ${D.fee!=null?`<li>${svg("bag")}<span><b>משלוח ${ils(D.fee)}</b>חינם בהזמנה מעל ${ils(D.freeFrom)}. מינימום ${ils(D.minimum)}</span></li>`:`<li>${svg("bag")}<span><b>משלוח או איסוף</b>בוחרים בסיום ההזמנה</span></li>`}`;
+const DT = D && D.time ? `תוך ${D.time}` : "בהקדם";
+
+// hours + status
+const mins = t => { const [h,m]=t.split(":").map(Number); return h*60+m; };
+const now = new Date(), today = now.getDay(), nowM = now.getHours()*60+now.getMinutes();
+const byDay = d => R.hours.find(h => h.day===d);
+const closeM = h => { const o=mins(h.open), c=mins(h.close); return c<=o ? c+1440 : c; };
+function status(){
+  const y = byDay((today+6)%7);
+  if (y && closeM(y) > 1440 && nowM < closeM(y)-1440) return {open:true, txt:`פתוח עכשיו, עד ${y.close}`};
+  const t = byDay(today);
+  if (t){ if (nowM>=mins(t.open) && nowM<closeM(t)) return {open:true, txt:`פתוח עכשיו, עד ${t.close}`};
+          if (nowM<mins(t.open)) return {open:false, txt:`סגור עכשיו. נפתח היום ב־${t.open}`}; }
+  for (let i=1;i<=7;i++){ const d=(today+i)%7, n=byDay(d); if(n) return {open:false, txt:`סגור עכשיו. נפתח ${i===1?"מחר":"ביום "+DAYS[d]} ב־${n.open}`}; }
+  return {open:false, txt:"סגור עכשיו"};
+}
+const st = status(); $("statusTxt").textContent = st.txt; $("strip").classList.toggle("is-open", st.open);
+$("hours").innerHTML = [0,1,2,3,4,5,6].map(d => { const h=byDay(d);
+  return `<li class="${d===today?"today":""}"><span>${esc(h&&h.label?h.label:"יום "+DAYS[d])}${d===today?" (היום)":""}</span><span class="t">${h?`${h.open}–${h.close}`:"סגור"}</span></li>`; }).join("");
+const q = encodeURIComponent(R.mapQuery);
+if (R.embedMap === false){
+  const card = document.createElement("a");
+  card.className = "map mapcard"; card.href = R.mapsLink; card.target = "_blank"; card.rel = "noopener";
+  card.innerHTML = `${svg("pin")}<b>${esc(R.address)}</b><span>פתיחה בגוגל מפות</span>`;
+  $("map").replaceWith(card);
+} else $("map").src = `https://maps.google.com/maps?q=${q}&z=15&hl=iw&output=embed`;
+$("addr").textContent = R.address;
+$("navBtns").innerHTML = `<a class="btn btn--ink" href="https://waze.com/ul?q=${q}&navigate=yes" target="_blank" rel="noopener">ניווט בוויז</a>
+  <a class="btn btn--white" href="${esc(R.mapsLink)}" target="_blank" rel="noopener">גוגל מפות</a>
+  <a class="btn btn--white" href="tel:${tel}">${esc(R.phone)}</a>`;
+$("fLine").textContent = `${R.address}. טלפון ${R.phone}`;
+$("fNote").textContent = R.demoNote || "";
+
+/* ---------- data ---------- */
+const ITEMS = {};
+R.menu.forEach(c => c.items.forEach((it,i) => { it.id = `${c.id}-${i}`; it.cat = c; ITEMS[it.id] = it; }));
+let cart = [];
+try { cart = JSON.parse(localStorage.getItem("demo-cart")||"[]").filter(l => ITEMS[l.id]); } catch(e){ cart = []; }
+const save = () => { try { localStorage.setItem("demo-cart", JSON.stringify(cart)); } catch(e){} };
+const cartCount = () => cart.reduce((s,l)=>s+l.qty,0);
+const subtotal = () => cart.reduce((s,l)=>s+l.qty*l.unit,0);
+
+/* ---------- layers (history-aware) ---------- */
+const stack = []; let lastFocus = [];
+const focusables = el => [...el.querySelectorAll('button,[href],input,select,textarea,[tabindex]:not([tabindex="-1"])')].filter(x=>!x.disabled && x.offsetParent!==null);
+function open(el){
+  if (stack.includes(el)) return;
+  lastFocus.push(document.activeElement);
+  el.hidden = false; stack.push(el); el.style.zIndex = 100 + stack.length*10; document.documentElement.classList.add("lock");
+  history.pushState({layer:stack.length}, "");
+  const f = el.querySelector("[data-autofocus]") || focusables(el)[0]; if (f) f.focus({preventScroll:true});
+}
+function hideTop(){
+  const el = stack.pop(); if (!el) return; el.hidden = true;
+  if (!stack.length) document.documentElement.classList.remove("lock");
+  const f = lastFocus.pop(); if (f && f.focus) f.focus({preventScroll:true});
+}
+function close(){ if (stack.length) history.back(); }
+document.addEventListener("keydown", e => {
+  if (!stack.length) return;
+  const top = stack[stack.length-1];
+  if (e.key === "Escape"){ e.preventDefault(); close(); }
+  if (e.key === "Tab"){ const f = focusables(top); if(!f.length) return;
+    if (e.shiftKey && document.activeElement===f[0]){ e.preventDefault(); f[f.length-1].focus(); }
+    else if (!e.shiftKey && document.activeElement===f[f.length-1]){ e.preventDefault(); f[0].focus(); } }
+});
+document.addEventListener("click", e => {
+  const c = e.target.closest("[data-close]"); if (c){ e.preventDefault(); close(); return; }
+  if (e.target.classList && e.target.classList.contains("scrim")) close();
+  const m = e.target.closest("[data-open-menu]"); if (m){ e.preventDefault(); openMenu(m.dataset.openMenu); return; }
+  const k = e.target.closest("[data-open-cart]"); if (k){ e.preventDefault(); openCart(); }
+});
+
+let toastT;
+function toast(msg){ const t=$("toast"); t.textContent=msg; t.classList.add("show"); clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove("show"),1800); }
+
+/* ---------- menu window ---------- */
+const body = $("mwBody");
+$("chips").innerHTML = R.menu.map(c => `<button class="chip" type="button" data-chip="${c.id}">${esc(c.title)}</button>`).join("");
+const CAT_ICONS = {
+  flame:'<path d="M12 2c1 3-1 5-1 7a3 3 0 0 0 6 0c0-1-.5-2-1-3 2 1.5 4 4 4 7a8 8 0 0 1-16 0c0-4 3-6 5-8 0 2 1 3 2 3 0-2-1-4 1-6z"/>',
+  bowl:'<path d="M3 11h18a9 9 0 0 1-18 0z"/><path d="M8 7c1-2 3-2 4 0M13 6c1-2 3-2 4 0"/>',
+  leaf:'<path d="M5 19C5 10 10 5 20 4c-1 10-6 15-15 15z"/><path d="M5 19l8-8"/>',
+  balls:'<circle cx="8" cy="15" r="4"/><circle cx="16" cy="15" r="4"/><circle cx="12" cy="8" r="4"/>',
+  fish:'<path d="M2 12c3-5 9-6 14-2l5-3v10l-5-3c-5 4-11 3-14-2z"/><circle cx="7" cy="11" r="1"/>',
+  cup:'<path d="M4 8h13v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5z"/><path d="M17 10h2a2 2 0 0 1 0 4h-2M8 3v2M12 3v2"/>',
+  bottle:'<path d="M10 2h4v4l2 3v12a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1V9l2-3z"/><path d="M8 13h8"/>'
+};
+function phTile(it, small){
+  const c = it.cat && it.cat.color || "#2B1B12", ic = CAT_ICONS[it.cat && it.cat.icon] || CAT_ICONS.bowl;
+  return `<div class="ph${small?" ph--s":""}" style="--c:${c}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ic}</svg></div>`;
+}
+function card(it){
+  const tags = (it.tags||[]).map(t=>`<span class="tag t-${t}">${t}</span>`).join("");
+  const priced = typeof it.price === "number";
+  return `<article class="card" data-id="${it.id}">
+    ${priced?`<button class="card__hit" type="button" data-item="${it.id}" aria-label="${esc(it.name)}, ${ils(it.price)}"></button>`:""}
+    <div class="card__txt"><div class="card__name">${esc(it.name)}</div>${it.desc?`<div class="card__desc">${esc(it.desc)}</div>`:""}
+      ${tags?`<div class="tags">${tags}</div>`:""}<div class="card__price">${priced?`${(it.opts||[]).some(k=>R.options[k]&&R.options[k].type==="one"&&R.options[k].choices.some(c=>c.price>0))?"מ־":""}${ils(it.price)}`:`<span style="color:var(--muted);font-weight:500">המחיר יעודכן</span>`}</div></div>
+    <div class="card__pic">${it.img?`<img src="${img(it.img,360,360)}" alt="" loading="lazy" width="360" height="360">`:phTile(it)}
+      ${priced?`<button class="add" type="button" data-add="${it.id}" aria-label="הוספה של ${esc(it.name)}">+</button>`:""}</div>
+  </article>`;
+}
+body.innerHTML = R.menu.map(c => `<section class="mw-cat" id="cat-${c.id}" data-cat="${c.id}" aria-labelledby="h-${c.id}">
+  <h3 id="h-${c.id}"><i style="background:${c.color}"></i>${esc(c.title)}</h3>${c.note?`<p class="catnote">${esc(c.note)}</p>`:""}
+  <div class="grid">${c.items.map(card).join("")}</div></section>`).join("") + `<p class="empty" id="noRes" hidden>לא מצאנו מנה בשם הזה. נסו מילה אחרת.</p>`;
+
+const chips = [...document.querySelectorAll(".chip")];
+function setChip(id){ chips.forEach(ch => { const on = ch.dataset.chip===id; ch.classList.toggle("on",on); if(on) ch.scrollIntoView({inline:"nearest",block:"nearest"}); }); }
+let spyLock = false;
+$("chips").addEventListener("click", e => { const ch = e.target.closest(".chip"); if(!ch) return;
+  setChip(ch.dataset.chip); spyLock = true; $("cat-"+ch.dataset.chip).scrollIntoView({behavior:"smooth",block:"start"}); setTimeout(()=>spyLock=false,700); });
+body.addEventListener("scroll", () => { if (spyLock) return;
+  const secs = [...body.querySelectorAll(".mw-cat:not([hidden])")]; const top = body.getBoundingClientRect().top + 60;
+  let cur = secs[0]; secs.forEach(s => { if (s.getBoundingClientRect().top <= top) cur = s; }); if (cur) setChip(cur.dataset.cat); }, {passive:true});
+
+$("q").addEventListener("input", e => {
+  const s = e.target.value.trim(); let any = false;
+  body.querySelectorAll(".mw-cat").forEach(sec => { let n=0;
+    sec.querySelectorAll(".card").forEach(cd => { const it=ITEMS[cd.dataset.id]; const hit = !s || (it.name+" "+it.desc).includes(s); cd.hidden=!hit; if(hit) n++; });
+    sec.hidden = !n; if(n) any = true; });
+  $("noRes").hidden = any;
+});
+body.addEventListener("click", e => {
+  const a = e.target.closest("[data-add]"); if (a){ const it=ITEMS[a.dataset.add];
+    if (it.opts && it.opts.length) openItem(it.id); else { addLine(it,[],"",1); toast(`${it.name} נוסף לעגלה`); } return; }
+  const h = e.target.closest("[data-item]"); if (h) openItem(h.dataset.item);
+});
+function openMenu(catId){
+  const mw = $("menuWin");
+  if (stack.includes(mw) && stack[stack.length-1] !== mw){ close(); return; }
+  open(mw);
+  if (catId){ requestAnimationFrame(()=>{ $("cat-"+catId).scrollIntoView({block:"start"}); setChip(catId); }); }
+  else { body.scrollTop = 0; setChip(R.menu[0].id); }
+}
+
+/* ---------- item sheet ---------- */
+let cur = null;
+function openItem(id){
+  const it = ITEMS[id]; cur = it;
+  const oldPh = document.querySelector("#itemSheet .it-ph"); if (oldPh) oldPh.remove();
+  if (it.img){ $("itImg").hidden = false; $("itImg").src = img(it.img,900,560); }
+  else { $("itImg").hidden = true; $("itImg").insertAdjacentHTML("afterend", `<div class="it-ph">${phTile(it)}</div>`); }
+  $("itName").textContent = it.name; $("itDesc").textContent = it.desc || "";
+  $("itDesc").hidden = !it.desc;
+  $("itOpts").innerHTML = (it.opts||[]).map(k => { const g = R.options[k];
+    return `<fieldset><legend>${esc(g.title)} <small>${g.type==="one"?"בחירה אחת":(g.note||"אפשר כמה")}</small></legend>
+      ${g.choices.map((c,i)=>`<label class="opt"><input type="${g.type==="one"?"radio":"checkbox"}" name="o-${k}" value="${i}" ${g.type==="one"&&i===0?"checked":""}><span>${esc(c.name)}</span>${c.price?`<em>+${ils(c.price)}</em>`:""}</label>`).join("")}
+    </fieldset>`; }).join("");
+  $("itNote").value = ""; $("itQty").value = 1; $("itQty").textContent = "1";
+  itTotal(); open($("itemSheet")); $("itemSheet").querySelector(".sheet__scroll").scrollTop = 0;
+}
+function chosen(){ const out = []; (cur.opts||[]).forEach(k => { const g=R.options[k];
+  document.querySelectorAll(`#itOpts [name="o-${k}"]:checked`).forEach(inp => out.push({g:g.title, ...g.choices[+inp.value]})); }); return out; }
+function itTotal(){ const unit = cur.price + chosen().reduce((s,c)=>s+c.price,0); const q = +$("itQty").textContent; $("itTotal").textContent = ils(unit*q); }
+$("itOpts").addEventListener("change", itTotal);
+$("itMinus").addEventListener("click", ()=>{ const q=Math.max(1,+$("itQty").textContent-1); $("itQty").textContent=q; itTotal(); });
+$("itPlus").addEventListener("click", ()=>{ const q=Math.min(30,+$("itQty").textContent+1); $("itQty").textContent=q; itTotal(); });
+$("itemForm").addEventListener("submit", e => { e.preventDefault();
+  addLine(cur, chosen(), $("itNote").value.trim(), +$("itQty").textContent); close(); toast(`${cur.name} נוסף לעגלה`); });
+
+function addLine(it, opts, note, qty){
+  const unit = it.price + opts.reduce((s,c)=>s+c.price,0);
+  const key = it.id + "|" + opts.map(o=>o.name).join(",") + "|" + note;
+  const ex = cart.find(l => l.key===key);
+  if (ex) ex.qty += qty; else cart.push({key, id:it.id, name:it.name, opts:opts.map(o=>o.name), note, unit, qty});
+  changed();
+}
+
+/* ---------- cart ---------- */
+function changed(){
+  save(); const n = cartCount(), s = subtotal();
+  document.querySelectorAll("[data-count]").forEach(el => { el.hidden = !n; el.textContent = n; });
+  $("cartbar").hidden = !n; $("cbCount").textContent = `${n} פריטים`; $("cbSum").textContent = ils(s);
+  renderCart();
+  if (!$("checkout").hidden) renderSummary();
+}
+function fees(mode){ const s = subtotal(); const fee = D && mode==="delivery" && D.fee!=null ? (s>=D.freeFrom?0:D.fee) : 0; return {s, fee, total:s+fee}; }
+function renderCart(){
+  if (!cart.length){
+    $("cartBody").innerHTML = `<div class="empty"><p style="font-size:19px;color:var(--ink);font-weight:700;margin:0 0 6px">העגלה ריקה</p>מוסיפים מנות מהתפריט, והן יופיעו כאן.</div>`;
+    $("cartFoot").innerHTML = `<button class="btn btn--amba btn--block" type="button" data-open-menu>לתפריט</button>`; return;
+  }
+  const s = subtotal(), left = D ? D.freeFrom - s : 0;
+  $("cartBody").innerHTML = `<ul class="lines">${cart.map((l,i)=>`<li class="line">
+      ${ITEMS[l.id].img?`<img src="${img(ITEMS[l.id].img,140,140)}" alt="" width="62" height="62">`:phTile(ITEMS[l.id],true)}
+      <div class="line__txt"><div class="line__name">${esc(l.name)}</div>
+        ${l.opts.length?`<div class="line__opts">${esc(l.opts.join(", "))}</div>`:""}${l.note?`<div class="line__opts">הערה: ${esc(l.note)}</div>`:""}</div>
+      <div class="line__end"><b>${ils(l.unit*l.qty)}</b>
+        <div class="stepper"><button type="button" data-dec="${i}" aria-label="${l.qty===1?"הסרה של":"פחות"} ${esc(l.name)}">−</button><output>${l.qty}</output><button type="button" data-inc="${i}" aria-label="עוד ${esc(l.name)}">+</button></div></div>
+    </li>`).join("")}</ul>
+    ${!D || D.fee==null ? "" : left>0?`<p class="hint" style="margin-top:12px">עוד ${ils(left)} ומשלוח בחינם</p>`:`<p class="hint ok" style="margin-top:12px">המשלוח עלינו</p>`}
+    <div class="sum"><div><span>סכום ביניים</span><span>${ils(s)}</span></div></div>`;
+  $("cartFoot").innerHTML = `<button class="btn btn--amba btn--block" type="button" id="toCheckout" style="justify-content:space-between"><span>להמשך הזמנה</span><span>${ils(s)}</span></button>`;
+}
+$("cartBody").addEventListener("click", e => {
+  const d = e.target.closest("[data-dec]"), u = e.target.closest("[data-inc]");
+  if (u){ cart[+u.dataset.inc].qty++; changed(); }
+  if (d){ const l = cart[+d.dataset.dec]; l.qty--; if(l.qty<=0){ cart.splice(+d.dataset.dec,1); toast(`${l.name} הוסר`);} changed(); }
+});
+$("cartFoot").addEventListener("click", e => { if (e.target.closest("#toCheckout")) openCheckout(); });
+function openCart(){ renderCart(); open($("cartSheet")); }
+
+/* ---------- checkout ---------- */
+const form = $("coForm");
+const mode = () => form.mode.value, when = () => form.when.value, pay = () => form.pay.value;
+const PICK = R.pickupTime || "";
+const PT = PICK ? `תוך ${PICK}` : "בהקדם";
+document.querySelector('input[value="pickup"]').closest("label").querySelector("small").textContent = PICK ? `מוכן תוך ${PICK}` : `ב${R.address}`;
+if (D){ $("segDel").textContent = D.fee!=null ? `${D.time}, ${ils(D.fee)}` : `ל${D.area}`; $("segNow").textContent = D.time || "בהקדם"; }
+else {
+  const seg = document.querySelector('input[value="delivery"]').closest(".seg");
+  seg.previousElementSibling.textContent = `איסוף עצמי, ${R.address}`;
+  seg.hidden = true; form.mode.value = "pickup";
+  document.querySelector('input[value="pickup"]').checked = true;
+  $("segNow").textContent = PT;
+}
+function slots(){
+  const h = byDay(today); const sel = $("fTime"); sel.innerHTML = "";
+  if (!h) return;
+  let t = Math.max(mins(h.open), Math.ceil((nowM+45)/15)*15); const end = closeM(h);
+  for (; t < end; t += 15){ const hh = String(Math.floor(t/60)%24).padStart(2,"0"), mm = String(t%60).padStart(2,"0"); sel.add(new Option(`${hh}:${mm}`, `${hh}:${mm}`)); }
+  if (!sel.options.length) sel.add(new Option("אין עוד שעות פנויות היום",""));
+}
+function renderSummary(){
+  const m = mode(), f = fees(m);
+  $("addrBox").hidden = m!=="delivery";
+  $("cashSub").textContent = m==="delivery" ? "לשליח" : "בקופה";
+  $("timeBox").hidden = when()!=="later";
+  const notes = { card:"אחרי האישור נפתח דף תשלום מאובטח של חברת הסליקה. פרטי האשראי לא נשמרים באתר.",
+                  bit:`אחרי האישור נשלח לכם בקשת תשלום בביט למספר שהזנתם.`, cash: m==="delivery"?"משלמים לשליח במזומן. כדאי להכין כסף קטן.":"משלמים בקופה באיסוף." };
+  $("payNote").textContent = notes[pay()];
+  $("coSum").innerHTML = `${cart.map(l=>`<div><span>${l.qty} × ${esc(l.name)}</span><span>${ils(l.unit*l.qty)}</span></div>`).join("")}
+    ${m==="delivery"?`<div><span>משלוח</span><span>${D.fee==null?"יאושר בטלפון":f.fee?ils(f.fee):"חינם"}</span></div>`:""}
+    <div class="tot"><span>לתשלום</span><span>${ils(f.total)}</span></div>`;
+  const below = m==="delivery" && f.s < D.minimum;
+  $("coMin").hidden = !below; $("coMin").textContent = below ? `מינימום להזמנת משלוח: ${ils(D.minimum)}. חסרים עוד ${ils(D.minimum-f.s)}.` : "";
+  $("coSubmit").textContent = `שליחת ההזמנה, ${ils(f.total)}`;
+}
+form.addEventListener("change", renderSummary);
+function openCheckout(){ if(!cart.length) return; slots(); renderSummary(); open($("checkout")); $("checkout").querySelector(".mw-body").scrollTop=0; }
+
+function check(){
+  const rules = { name: v=>v.trim().length>=2, phone: v=>/^0\d{8,9}$/.test(v.replace(/[^\d]/g,"")), street: v=> mode()!=="delivery" || v.trim().length>=3 };
+  const ids = {name:"fName", phone:"fPhone", street:"fStreet"}; let first = null;
+  for (const k in rules){ const ok = rules[k]($(ids[k]).value); const fld = form.querySelector(`[data-f="${k}"]`);
+    fld.classList.toggle("bad", !ok); $(ids[k]).setAttribute("aria-invalid", !ok); if(!ok && !first) first = $(ids[k]); }
+  if (first){ first.focus(); return false; }
+  if (mode()==="delivery" && subtotal() < D.minimum){ $("coMin").scrollIntoView({block:"center"}); return false; }
+  return true;
+}
+["fName","fPhone","fStreet"].forEach(id => $(id).addEventListener("input", e => e.target.closest(".field").classList.remove("bad")));
+form.addEventListener("submit", e => { e.preventDefault(); if (!check()) return;
+  const m = mode(), f = fees(m), num = Math.floor(1000 + Math.random()*9000);
+  const payTxt = {card:"אשראי", bit:"ביט", cash:"מזומן"}[pay()];
+  const whenTxt = when()==="later" && $("fTime").value ? `לשעה ${$("fTime").value}` : (m==="delivery" ? DT : PT);
+  const lines = cart.map(l => `${l.qty} × ${l.name}${l.opts.length?` (${l.opts.join(", ")})`:""}${l.note?` [${l.note}]`:""}`);
+  const msg = [`הזמנה מספר ${num}`, ...lines, m==="delivery"?`משלוח ל: ${$("fStreet").value} ${$("fApt").value}`.trim():"איסוף עצמי",
+    $("fNote").value && m==="delivery" ? `הערה לשליח: ${$("fNote").value}` : "", `מתי: ${whenTxt}`, `תשלום: ${payTxt}`, `סה״כ: ${ils(f.total)}`,
+    `${$("fName").value}, ${$("fPhone").value}`].filter(Boolean).join("\n");
+  $("doneTxt").innerHTML = `מספר הזמנה ${num}.<br>${m==="delivery"?"השליח יוצא אליך":"ההזמנה תחכה לך בדלפק"} <span style="white-space:nowrap">${esc(whenTxt)}</span>.`;
+  $("doneBox").innerHTML = `<div class="sum" style="padding:0">${cart.map(l=>`<div><span>${l.qty} × ${esc(l.name)}</span><span>${ils(l.unit*l.qty)}</span></div>`).join("")}
+    <div class="tot"><span>לתשלום, ${payTxt}</span><span>${ils(f.total)}</span></div></div>
+    ${pay()!=="cash" ? `<p class="demo-pay">התשלום באתר עוד לא מחובר. כשהוא יחובר, בשלב הזה ${pay()==="bit"?"נפתחת אפליקציית ביט עם הסכום לאישור":"נפתח דף תשלום מאובטח לפרטי האשראי"}.</p>` : ""}`;
+  if (R.whatsapp){ $("doneWa").href = `https://wa.me/${R.whatsapp}?text=${encodeURIComponent(msg)}`; }
+  else { $("doneWa").href = `tel:${tel}`; $("doneWa").removeAttribute("target"); $("doneWa").textContent = `לאישור טלפוני: ${R.phone}`; }
+  cart = []; changed();
+  open($("doneWin"));
+});
+$("doneBack").addEventListener("click", () => { const n = stack.length; if (n) history.go(-n); });
+window.addEventListener("popstate", () => { /* back button / history.go(-n): close layers down to the history depth */
+  while (stack.length > (history.state && history.state.layer || 0)) hideTop(); });
+
+/* ---------- legal pages + cookie notice ---------- */
+const UPD = "12 בנובמבר 2026";
+const contact = `${esc(R.name)}, ${esc(R.address)}. טלפון: ${esc(R.phone)}`;
+const DOCS = {
+  privacy: { t: "מדיניות פרטיות", h: `
+    <p>הפרטיות שלכם חשובה לנו. כאן מוסבר איזה מידע נאסף באתר של ${esc(R.name)}, למה, ומה הזכויות שלכם.</p>
+    <h3>איזה מידע נאסף</h3>
+    <ul>${R.orderUrl ? `<li>האתר לא אוסף פרטים אישיים. ההזמנות מתבצעות בוולט, לפי מדיניות הפרטיות של וולט.</li>` : `<li>כשאתם שולחים הזמנה: שם, מספר טלפון, פרטי ההזמנה וההערות שכתבתם${D ? ", וכתובת למשלוח" : ""}.</li>`}
+    <li>אנחנו לא אוספים ולא שומרים פרטי כרטיס אשראי. אם תשלום באשראי או בביט פעיל באתר, הוא מתבצע בדף מאובטח של חברת הסליקה.</li></ul>
+    <h3>למה המידע נאסף</h3>
+    <p>רק כדי להכין את ההזמנה, למסור אותה, וליצור איתכם קשר לגביה. לא נשלח לכם פרסומות בלי הסכמה.</p>
+    <h3>איפה המידע נשמר</h3>
+    <p>${R.orderUrl ? "האתר עצמו לא שומר מידע עליכם. מה שאתם מזינים בוולט נשמר אצל וולט." : "ההזמנה עוברת אלינו ישירות, בטלפון או בוואטסאפ. העגלה נשמרת רק בדפדפן שלכם, ונמחקת כשמסיימים הזמנה או מנקים את הדפדפן."}</p>
+    <h3>עם מי המידע משותף</h3>
+    <p>איננו מוכרים ואיננו מעבירים את המידע לאחרים, חוץ מחברת הסליקה לצורך תשלום, או כשהחוק מחייב.</p>
+    <h3>עוגיות</h3>
+    <p>המפה באתר מוצגת על ידי גוגל, וגוגל עשויה לשמור עוגיות משלה. לפרטים, ראו את מדיניות העוגיות.</p>
+    <h3>הזכויות שלכם</h3>
+    <p>אתם יכולים לבקש לראות את המידע שלכם, לתקן אותו או למחוק אותו. פנו אלינו: ${contact}.</p>
+    <p class="upd">עודכן לאחרונה: ${UPD}</p>` },
+  access: { t: "הצהרת נגישות", h: `
+    <p>${esc(R.name)} רוצה שכל אחד יוכל להשתמש באתר בקלות, כולל אנשים עם מוגבלות. האתר נבנה בהתאם להנחיות התקן הישראלי ת״י 5568 ברמה AA, ככל הניתן.</p>
+    <h3>מה עשינו באתר</h3>
+    <ul><li>אפשר לנווט בכל האתר עם המקלדת, ורואים בבירור איפה נמצאים.</li>
+    <li>לתמונות יש תיאור טקסט, ולכפתורים יש שמות שקוראי מסך מקריאים.</li>
+    <li>ניגודיות צבעים ברורה וגופן קריא. אפשר להגדיל את הטקסט בדפדפן בלי שהאתר יישבר.</li>
+    <li>האתר מותאם לטלפון, לטאבלט ולמחשב, ומכבד הגדרה של הפחתת תנועה.</li></ul>
+    <h3>מה עדיין לא מושלם</h3>
+    <p>המפה מוצגת על ידי גוגל, ואין לנו שליטה מלאה על הנגישות שלה. אפשר תמיד להשתמש בכפתורי הניווט ובכתובת הכתובה.</p>
+    <h3>נגישות במסעדה עצמה</h3>
+    <p>לפרטים על חניה, כניסה ושירותים נגישים במקום, התקשרו אלינו ונשמח לעזור.</p>
+    <h3>נתקלתם בבעיה?</h3>
+    <p>אם משהו באתר לא נגיש לכם, ספרו לנו ונתקן: ${contact}.</p>
+    <p class="upd">עודכן לאחרונה: ${UPD}</p>` },
+  terms: { t: "תקנון הזמנות", h: `
+    <h3>איך מזמינים</h3>
+    <p>${R.orderUrl ? "ההזמנות, למשלוח ולאיסוף, מתבצעות בוולט. התשלום, אישור ההזמנה והמשלוח עצמו הם לפי התנאים של וולט." : "הזמנה שנשלחת מהאתר היא בקשה. היא נכנסת לתוקף אחרי שאנחנו מאשרים אותה בטלפון או בהודעה."}</p>
+    <h3>מחירים</h3>
+    <p>${R.orderUrl ? "המחירים באתר כוללים מע״מ. המחיר הקובע הוא המחיר שמופיע בוולט בזמן ההזמנה." : "המחירים באתר כוללים מע״מ. אם יש פער בין המחיר באתר למחיר במסעדה, נעדכן אתכם לפני שמתחילים להכין."}</p>
+    <h3>${D || R.deliveryUrl ? "איסוף ומשלוח" : "איסוף"}</h3>
+    <p>${R.orderUrl ? `משלוח באזור ${esc(D ? D.area : R.city)} ואיסוף עצמי מ${esc(R.address)}, דרך וולט. דמי המשלוח וזמן ההגעה מוצגים בוולט לפני התשלום.</p><p hidden>` : ""}${D ? `משלוח באזור ${esc(D.area)}${D.time?`, תוך ${esc(D.time)}`:""}${D.fee==null?". דמי המשלוח נמסרים בטלפון באישור ההזמנה":""}. ` : ""}הזמנה לאיסוף מחכה לכם בדלפק${PICK?` בדרך כלל תוך ${esc(PICK)}`:""}, ב${esc(R.address)}.${R.deliveryUrl ? " משלוחים מתבצעים דרך וולט, לפי התנאים של וולט." : ""}</p>
+    <h3>ביטול</h3>
+    <p>אפשר לבטל בלי עלות כל עוד לא התחלנו להכין את ההזמנה. התקשרו אלינו: ${esc(R.phone)}.</p>
+    <h3>אלרגיות</h3>
+    <p>במטבח שלנו יש שומשום (טחינה) וגלוטן. אם יש לכם אלרגיה, כתבו את זה בהערות למטבח או ספרו לנו בטלפון.</p>
+    <h3>בעיה בהזמנה</h3>
+    <p>משהו חסר או לא בסדר? התקשרו אלינו מיד ונסדר: ${esc(R.phone)}.</p>
+    <p class="upd">עודכן לאחרונה: ${UPD}</p>` },
+  cookies: { t: "עוגיות ואחסון בדפדפן", h: `
+    <p>האתר לא עוקב אחריכם ולא מציג פרסומות.</p>
+    <h3>מה נשמר</h3>
+    <ul>${R.orderUrl ? "" : `<li><b>העגלה:</b> המנות שבחרתם נשמרות בדפדפן שלכם, כדי שלא ייעלמו אם תסגרו את הדף. המידע לא נשלח לאף אחד.</li>`}
+    <li><b>המפה:</b> מוצגת על ידי גוגל מפות, שעשויה לשמור עוגיות לפי המדיניות של גוגל.</li>
+    <li><b>ההודעה הזאת:</b> אחרי שלוחצים "הבנתי", הדפדפן זוכר את זה כדי לא להציג אותה שוב.</li></ul>
+    <h3>איך מוחקים</h3>
+    <p>אפשר למחוק עוגיות ונתוני אתרים בכל רגע בהגדרות הדפדפן.</p>
+    <p class="upd">עודכן לאחרונה: ${UPD}</p>` },
+};
+document.addEventListener("click", e => {
+  const a = e.target.closest("[data-doc]"); if (!a) return;
+  e.preventDefault();
+  const d = DOCS[a.dataset.doc]; $("docH").textContent = d.t; $("docBody").innerHTML = d.h;
+  if ($("docWin").hidden) open($("docWin"));
+  $("docWin").querySelector(".mw-body").scrollTop = 0;
+});
+let cookieSeen = false;
+try { cookieSeen = localStorage.getItem("cookie-ok") === "1"; } catch(e){}
+if (!cookieSeen) $("cookie").hidden = false;
+$("cookieOk").addEventListener("click", () => { $("cookie").hidden = true; try { localStorage.setItem("cookie-ok","1"); } catch(e){} });
+
+changed();
+
+/* ---------- pickup on the site, delivery through an outside service (R.deliveryUrl) ---------- */
+if (R.deliveryUrl){
+  const DU = R.deliveryUrl, DL = R.deliveryLabel || "משלוח";
+  const ext = (cls, html) => `<a class="${cls}" href="${esc(DU)}" target="_blank" rel="noopener">${html}</a>`;
+  const hb = document.querySelector(".hero__ctas [data-open-menu]");
+  hb.textContent = "להזמנה לאיסוף"; hb.insertAdjacentHTML("afterend", ext("btn btn--white", esc(DL)));
+  $("delivery").hidden = false; $("navDel").hidden = false; $("navDel").textContent = "איסוף ומשלוח";
+  $("delH").textContent = "איסוף או משלוח";
+  $("facts").innerHTML = `
+    <li>${svg("bag")}<span><b>איסוף עצמי</b>מזמינים ומשלמים כאן באתר, ואוספים מ${esc(R.address)}</span></li>
+    <li>${svg("pin")}<span><b>משלוח ב${esc(R.deliveryArea || R.city)}</b>עד הדלת, דרך וולט</span></li>
+    <li>${svg("clock")}<span><b>אותו תפריט</b>כל המנות זמינות גם לאיסוף וגם למשלוח</span></li>`;
+  const bb = document.querySelector("#delivery [data-open-menu]");
+  bb.textContent = "להזמנה לאיסוף"; bb.insertAdjacentHTML("afterend", " " + ext("btn btn--white", esc(DL)));
+  const seg = document.querySelector('input[value="delivery"]').closest(".seg");
+  seg.insertAdjacentHTML("afterend", `<p class="hint" style="margin:0">רוצים משלוח? ${ext("", "להזמנה בוולט")}</p>`);
+}
+
+/* ---------- ordering through an outside service (R.orderUrl) ---------- */
+if (R.orderUrl){
+  const OU = R.orderUrl, OL = R.orderLabel || "להזמנה";
+  document.documentElement.classList.add("ext");
+  const toLink = (el, html) => { if (!el) return; const a = document.createElement("a");
+    a.className = el.className; a.href = OU; a.target = "_blank"; a.rel = "noopener"; a.innerHTML = html; el.replaceWith(a); return a; };
+  toLink(document.querySelector(".nav__end .btn"), OL);
+  const heroBtn = document.querySelector(".hero__ctas [data-open-menu]");
+  const menuBtn = document.createElement("button"); menuBtn.type = "button"; menuBtn.className = "btn btn--white"; menuBtn.dataset.openMenu = ""; menuBtn.textContent = "לתפריט";
+  heroBtn.after(menuBtn); toLink(heroBtn, OL);
+  toLink(document.querySelector("#delivery [data-open-menu]"), OL);
+  toLink(document.querySelector(".mbar .m4"), `<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18M16 10a4 4 0 0 1-8 0"/></svg>להזמנה`);
+  $("delH").textContent = "משלוח או איסוף";
+  $("facts").innerHTML = `
+    <li>${svg("pin")}<span><b>משלוח ב${esc(D ? D.area : R.city)}</b>עד הדלת, דרך וולט</span></li>
+    <li>${svg("bag")}<span><b>איסוף עצמי</b>מזמינים בוולט ואוספים מ${esc(R.address)}</span></li>
+    <li>${svg("clock")}<span><b>כל התפריט</b>אותן מנות ואותם מחירים כמו בתפריט כאן</span></li>`;
+  $("cartbar").innerHTML = `<a class="btn btn--ink" href="${esc(OU)}" target="_blank" rel="noopener" style="justify-content:center">${esc(OL)}</a>`;
+  $("cartbar").hidden = false;
+  $("itOrder").href = OU; $("itOrder").textContent = OL; $("itOrder").hidden = false;
+  $("itemForm").addEventListener("submit", e => { e.stopImmediatePropagation(); e.preventDefault(); }, true);
+  const ck = document.querySelector("#cookie p"); if (ck) ck.innerHTML = `האתר משתמש באחסון בדפדפן ובמפה של גוגל. <a href="#" data-doc="cookies">פרטים</a>`;
+}
+})();
+</script>
+</body>
+</html>
